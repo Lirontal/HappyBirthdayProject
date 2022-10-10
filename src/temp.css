@@ -66,10 +66,10 @@
   visibility: hidden;
 }
 
-.text-box .fake-btn {
+.fake-btn {
   position: absolute;
   left: 5px;
-  bottom: -48px;
+  bottom: -60px;
   color: #fff;
   background-color: rgb(21, 161, 237);
   padding: 7px 10px;
@@ -87,6 +87,7 @@
   padding: 3px 5px;
   border-radius: 3px;
   display: inline-block;
+  margin-right: 10px;
 }
 
 .five .idea-5 {
@@ -257,9 +258,9 @@
     width: 90%;
   }
 
-  .text-box .fake-btn {
+  .fake-btn {
     left: 5px;
-    bottom: -48px;
+    bottom: -60px;
   }
 
   .idea-5 span {
@@ -287,4 +288,8 @@
     font-size: 1.5rem;
     font-weight: lighter;
   }
+}
+
+.idea5text {
+  padding-left: 45px;
 }
