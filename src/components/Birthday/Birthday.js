@@ -5,7 +5,7 @@ import bal1 from '../../images/balloon1.svg';
 import bal2 from '../../images/balloon2.svg';
 import bal3 from '../../images/balloon3.svg';
 
-import reut from '../../images/reut.jpg';
+import reut from '../../images/reut.JPG';
 
 import { getRandomInt } from "../../utils";
 export default function Birthday() {
@@ -32,9 +32,6 @@ export default function Birthday() {
   const textbox = `אהובה שלי ❤️
 המון המון מזל טוב, אני מאחל לך....`;
 
-  const a = `<span>${textbox
-    .split("")
-    .join("</span><span>")}</span`;
   const b =
     textbox.split("").map((c, i) => <span key={i}>{c}</span>)
 
