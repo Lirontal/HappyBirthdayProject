@@ -1,9 +1,10 @@
 .heading {
   font-size: 36px;
-  color: #89CFF2;
+  color: #89cff2;
 }
 .highlight {
-  color: #800020;
+  /* color: #800020; */
+  color: lawngreen;
 }
 .countdown-wrapper {
   max-width: 800px;

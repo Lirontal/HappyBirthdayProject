@@ -55,6 +55,7 @@
   border-radius: 5px;
   padding: 10px;
   position: relative;
+  background-color: white;
 }
 
 .text-box p {
@@ -116,9 +117,13 @@
 
 .six .hat {
   position: absolute;
-  width: 80px;
-  top: -35px;
-  left: 41.5%;
+  width: 60px;
+  top: -25px;
+  margin-left: auto;
+  margin-right: auto;
+  right: 0;
+  left: 77px;
+  /* left: 41.5%; */
   /* transform: scale(0.1); */
 }
 
@@ -227,17 +232,17 @@
 /* Media Queries */
 @media screen and (max-height: 1000px) {
   .six .hat {
-    left: 40%;
+    /* left: 40%; */
   }
 }
 
 @media screen and (max-height: 800px) {
   .six .hat {
-    left: 37%;
+    /* left: 37%; */
   }
 }
 
-@media screen and (max-height: 700px) {
+/* @media screen and (max-height: 700px) {
   .six .hat {
     left: 32%;
   }
@@ -247,7 +252,7 @@
   .six .hat {
     left: 32%;
   }
-}
+} */
 
 @media screen and (max-width: 500px) {
   .container {
@@ -271,9 +276,13 @@
     font-size: 10rem;
   }
 
-  .six .hat {
+  .hat {
     width: 50px;
     top: -20px;
+    /* margin-left: auto;
+    margin-right: auto;
+    right: 0;
+    left: 20%; */
   }
 
   .wish-hbd {
@@ -292,4 +301,12 @@
 
 .idea5text {
   padding-left: 45px;
+}
+
+.App {
+  background: url("../../images/happy-birthday-bunting.jpg") no-repeat center
+    center fixed;
+  background: url("../../images/bg2.png") no-repeat center center fixed;
+
+  background-size: cover;
 }
