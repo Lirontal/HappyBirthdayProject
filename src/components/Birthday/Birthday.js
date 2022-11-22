@@ -10,6 +10,8 @@ import reut from '../../images/reut.JPG';
 import hat from '../../images/hat.svg';
 
 import { getRandomInt } from "../../utils";
+import { randomizeFireworks } from "./birthdayUtils";
+
 export default function Birthday() {
 
   const el = useRef();
@@ -298,44 +300,58 @@ export default function Birthday() {
       .from(
         q(".wish-hbd"),
         {
+          stagger: 0.7,
+          opacity: 0,
+          y: -50,
+          // scale: 0.3,
+          // rotation: 150,
+          color: "#ff69b4",
+          skewX: "15deg",
           ease: Elastic.easeOut.config(1, 0.5),
-          color: "yellow",
-          opacity: 0
+          duration: 0.1,
+          paddingTop: "45px"
         },
       )
-      .to(
+
+      .fromTo(
         q(".wish-hbd"),
         {
-          duration: 5.5,
-          stagger: 10,
-          opacity: 1,
-          rotation: 180,
-          transform: 'scale(-1, 1)',
-          // scale: 0.3,
-          //skewX: "30deg",
-          ease: Elastic.easeOut.config(1, 0.5),
-          color: "blue"
+          scale: 0.2,
+          rotationY: 150,
+          opacity: 0,
+          stagger: 0.7,
+        },
+        {
+          scale: 1,
+          rotationY: 0,
+          color: "#ff69b4",
+          ease: Expo.easeInOut,
+          duration: 2.1,
+          opacity: 1
         },
       )
 
-    // .fromTo(
-    //   q(".wish-hbd"),
-    //   {
-    //     duration:0.7,
-    //     scale: 1.4,
-    //     rotationY: 150,
-    //     opacity:1,
-    //   },
-    //   {
-    //     stagger:0.1,
-    //     scale: 1,
-    //     rotationY: 0,
-    //     color: "#ff69b4",
-    //     ease: Expo.easeOut
-    //   },
-    //   "party"
-    // )
 
+      .to(
+        q(".eight svg"),
+        {
+          duration: 5.4,
+          visibility: "visible",
+          opacity: 0,
+          scale: 80,
+          stagger: 0.3,
+        },
+      )
+      // .to(
+      //   q(".nine svg"),
+      //   {
+      //     duration: 5.4,
+      //     visibility: "visible",
+      //     opacity: 0,
+      //     scale: 80,
+      //     stagger: 10,
+      //   },
+      // )
   }, []);
 
   const randomBalloons = (n = 10) => {
@@ -348,6 +364,7 @@ export default function Birthday() {
     })
     return res;
   }
+  
   return (
     <div ref={el} className="App">
       <div className="container">
@@ -389,11 +406,10 @@ export default function Birthday() {
         </div> */}
 
         <div className="six">
-          <img src={reut} alt="" className="reut-dp" data-node-name="imagePath" />
+          <img src={reut} alt="" className="reut-dp" data-node-name="imagePath" draggable="false"/>
           <img src={hat} alt="" class="hat" />
           <div className="wish">
             <h3 className="wish-hbd" data-node-name="wishHeading">יום הולדת שמח!</h3>
-            {/* <h5 data-node-name="wishText">May the js.prototypes always be with you! ;)</h5> */}
           </div>
         </div>
         <div className="seven">
@@ -401,35 +417,12 @@ export default function Birthday() {
             {randomBalloons()}
           </div>
         </div>
-        {/* <div className="eight">
-      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="20" />
-      </svg>
-      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="20" />
-      </svg>
-      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="20" />
-      </svg>
-      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="20" />
-      </svg>
-      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="20" />
-      </svg>
-      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="20" />
-      </svg>
-      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="20" />
-      </svg>
-      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="20" />
-      </svg>
-      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="20" />
-      </svg>
-    </div> */}
+        <div className="eight">
+          {randomizeFireworks()}
+        </div>
+        {/* <div className="nine">
+          {randomizeFireworks()}
+        </div> */}
         {/*<div className="nine">
       <p data-node-name="outroText">Okay, now come back and tell me if you liked it.</p>
       <p id="replay" data-node-name="replayText">Or click, if you want to watch it again.</p>
