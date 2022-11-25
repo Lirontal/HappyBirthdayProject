@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { gsap, Expo, Elastic } from "gsap";
 import "./Birthday.css"
 import bal1 from '../../images/balloon1.svg';
@@ -11,8 +11,11 @@ import hat from '../../images/hat.svg';
 
 import { getRandomInt } from "../../utils";
 import { randomizeFireworks } from "./birthdayUtils";
+import CarouselComponent from "../Carousel/Carousel";
 
 export default function Birthday() {
+
+  const [isShowCarousel, setIsShowCarousel] = useState(false);
 
   const el = useRef();
   const q = gsap.utils.selector(el);
@@ -42,212 +45,212 @@ export default function Birthday() {
   useEffect(() => {
 
     tl.current = gsap.timeline()
-      //   .from(q(".text-box"), {
-      //     visibility: "hidden"
-      //   })
+      .from(q(".text-box"), {
+        visibility: "hidden"
+      })
       .to(q(".container"), {
         duration: 0.1,
         visibility: "visible"
       })
 
-      // .from(q(".one"), {
-      //   duration: 0.4,
-      //   opacity: 0,
-      //   y: 0
-      // })
-      // .from(q(".two"), {
-      //   duration: 0.4,
-      //   opacity: 0,
-      //   y: 10
-      // }, "-=1")
-      // .to(q(".one"), {
-      //   duration: 0.7,
-      //   opacity: 1,
-      //   y: -10
-      // }, "+=0.5")
-      // .to(q(".two"), {
-      //   duration: 0.7,
-      //   opacity: 1,
-      //   y: -10
-      // }, "+=0.5")
-      // .to(q(".one"), {
-      //   duration: 0.7,
-      //   opacity: 0,
-      //   y: 10
-      // }, "+=0.5")
-      // .to(q(".two"), {
-      //   duration: 0.7,
-      //   opacity: 0,
-      //   y: 10
-      // }, "+=0.5")
+      .from(q(".one"), {
+        duration: 0.4,
+        opacity: 0,
+        y: 0
+      })
+      .from(q(".two"), {
+        duration: 0.4,
+        opacity: 0,
+        y: 10
+      }, "-=1")
+      .to(q(".one"), {
+        duration: 0.7,
+        opacity: 1,
+        y: -10
+      }, "+=0.5")
+      .to(q(".two"), {
+        duration: 0.7,
+        opacity: 1,
+        y: -10
+      }, "+=0.5")
+      .to(q(".one"), {
+        duration: 0.7,
+        opacity: 0,
+        y: 10
+      }, "+=0.5")
+      .to(q(".two"), {
+        duration: 0.7,
+        opacity: 0,
+        y: 10
+      }, "+=0.5")
 
 
-      // .from(q(".three"), {
-      //   duration: 0.4,
-      //   opacity: 0,
-      //   y: 0
-      // })
-      // .to(q(".three"), {
-      //   duration: 0.7,
-      //   opacity: 1,
-      //   y: -10
-      // }, "+=0.5")
-      // .to(q(".three"), {
-      //   duration: 0.7,
-      //   opacity: 0,
-      //   y: 10
-      // }, "+=0.5")
-
-
-
-
-
-      // .from(q(".text-box"), {
-      //   duration: 2.1,
-      //   opacity: 0,
-      //   scale: 0.2,
-      // })
-      // .to(q(".text-box"), {
-      //   duration: 0.7,
-      //   opacity: 1,
-      //   scale: 1,
-      //   visibility: "visible"
-
-      // }, "+=0.5")
-
-      // .from(q(".fake-btn"), {
-      //   duration: 0.7,
-      //   scale: 0.2,
-      //   opacity: 0
-      // })
-      // .to(q(".fake-btn"), {
-      //   duration: 0.7,
-      //   scale: 1,
-      //   opacity: 1
-      // }, "-=0.5")
-      // .to(
-      //   q(".hbd-chatbox span"),
-      //   {
-      //     stagger: 0.08,
-      //     duration: 0.7,
-      //     visibility: "visible"
-      //   },
-      // )
-      // .to(q(".fake-btn"), {
-      //   duration: 0.7,
-      //   backgroundColor: "rgb(127, 206, 248)"
-      // })
-      // .to(
-      //   q(".four"),
-      //   {
-      //     duration: 0.7,
-      //     scale: 0.2,
-      //     opacity: 0,
-      //     y: -150
-      //   },
-      //   "+=0.7"
-      // )
+      .from(q(".three"), {
+        duration: 0.4,
+        opacity: 0,
+        y: 0
+      })
+      .to(q(".three"), {
+        duration: 0.7,
+        opacity: 1,
+        y: -10
+      }, "+=0.5")
+      .to(q(".three"), {
+        duration: 0.7,
+        opacity: 0,
+        y: 10
+      }, "+=0.5")
 
 
 
-      // .from(q(".idea-1"), ideaTextTransLeave)
-      // .to(q(".idea-1"), ideaTextTrans, "+=1")
-      // .to(q(".idea-1"), {
-      //   duration: 0.7,
-      //   opacity: 0,
-      //   y: 20
-      // }, "+=1")
-
-      // .from(q(".idea-2"), ideaTextTransLeave)
-      // .to(q(".idea-2"), ideaTextTrans, "+=1")
-      // .to(q(".idea-2"), {
-      //   duration: 0.7,
-      //   opacity: 0,
-      //   y: 20
-      // }, "+=1")
-
-      // .from(q(".idea-3"), { ...ideaTextTransLeave, visibility: "hidden" })
-      // .to(q(".idea-3"), {
-      //   ...ideaTextTrans, visibility: "visible"
-      // }, "+=1")
-      // .to(".idea-3 strong", {
-      //   duration: 0.5,
-      //   scale: 1.2,
-      //   x: -10,
-      //   backgroundColor: "rgb(21, 161, 237)",
-      //   color: "#fff",
-      //   visibility: "visible"
-      // })
-      // .to(q(".idea-3"), {
-      //   duration: 0.7,
-      //   opacity: 0,
-      //   y: 20
-      // }, "+=0.5")
-
-      // .from(q(".idea-4"), ideaTextTransLeave)
-      // .to(q(".idea-4"), ideaTextTrans, "+=1")
-      // .to(q(".idea-4"), {
-      //   duration: 0.7,
-      //   opacity: 0,
-      //   y: 20
-      // }, "+=0.5")
 
 
+      .from(q(".text-box"), {
+        duration: 2.1,
+        opacity: 0,
+        scale: 0.2,
+      })
+      .to(q(".text-box"), {
+        duration: 0.7,
+        opacity: 1,
+        scale: 1,
+        visibility: "visible"
 
-      // .from(q(".idea-5"), {
-      //   ...ideaTextTransLeave, rotationX: 15,
-      //   rotationZ: -10,
-      //   skewY: "-5deg",
-      //   z: 10
-      // })
-      // .to(q(".idea-5"), {
-      //   ...ideaTextTrans, rotationX: 15,
-      //   rotationZ: -10,
-      //   skewY: "-5deg",
-      //   z: 10
-      // }, "+=1")
-      // .to(
-      //   q(".idea-5 .smiley"),
-      //   {
-      //     duration: 0.7,
-      //     rotation: -90,
-      //     x: 8
-      //   },
-      //   "+=0.4"
-      // )
-      // .to(q(".idea-5"), {
-      //   duration: 0.6,
-      //   opacity: 0,
-      //   y: 20
-      // }, "+=0.3")
+      }, "+=0.5")
 
-      // .from(
-      //   q(".idea-6 span"),
-      //   {
-      //     duration: 0.8,
-      //     opacity: 0,
-      //     rotation: 15,
-      //     ease: Expo.easeIn
-      //   },
-      // )
-      // .to(q(".idea-6 span"), {
-      //   stagger: 0.2,
-      //   scale: 1,
-      //   opacity: 1,
-      //   rotation: 0,
-      // }, "+=1")
-      // .to(
-      //   q(".idea-6 span"),
-      //   {
-      //     stagger: 0.2,
-      //     duration: 0.8,
-      //     scale: 1,
-      //     opacity: 0,
-      //     rotation: -15,
-      //     ease: Expo.easeIn
-      //   },
-      //   "+=1"
-      // )
+      .from(q(".fake-btn"), {
+        duration: 0.7,
+        scale: 0.2,
+        opacity: 0
+      })
+      .to(q(".fake-btn"), {
+        duration: 0.7,
+        scale: 1,
+        opacity: 1
+      }, "-=0.5")
+      .to(
+        q(".hbd-chatbox span"),
+        {
+          stagger: 0.08,
+          duration: 0.7,
+          visibility: "visible"
+        },
+      )
+      .to(q(".fake-btn"), {
+        duration: 0.7,
+        backgroundColor: "rgb(127, 206, 248)"
+      })
+      .to(
+        q(".four"),
+        {
+          duration: 0.7,
+          scale: 0.2,
+          opacity: 0,
+          y: -150
+        },
+        "+=0.7"
+      )
+
+
+
+      .from(q(".idea-1"), ideaTextTransLeave)
+      .to(q(".idea-1"), ideaTextTrans, "+=1")
+      .to(q(".idea-1"), {
+        duration: 0.7,
+        opacity: 0,
+        y: 20
+      }, "+=1")
+
+      .from(q(".idea-2"), ideaTextTransLeave)
+      .to(q(".idea-2"), ideaTextTrans, "+=1")
+      .to(q(".idea-2"), {
+        duration: 0.7,
+        opacity: 0,
+        y: 20
+      }, "+=1")
+
+      .from(q(".idea-3"), { ...ideaTextTransLeave, visibility: "hidden" })
+      .to(q(".idea-3"), {
+        ...ideaTextTrans, visibility: "visible"
+      }, "+=1")
+      .to(".idea-3 strong", {
+        duration: 0.5,
+        scale: 1.2,
+        x: -10,
+        backgroundColor: "rgb(21, 161, 237)",
+        color: "#fff",
+        visibility: "visible"
+      })
+      .to(q(".idea-3"), {
+        duration: 0.7,
+        opacity: 0,
+        y: 20
+      }, "+=0.5")
+
+      .from(q(".idea-4"), ideaTextTransLeave)
+      .to(q(".idea-4"), ideaTextTrans, "+=1")
+      .to(q(".idea-4"), {
+        duration: 0.7,
+        opacity: 0,
+        y: 20
+      }, "+=0.5")
+
+
+
+      .from(q(".idea-5"), {
+        ...ideaTextTransLeave, rotationX: 15,
+        rotationZ: -10,
+        skewY: "-5deg",
+        z: 10
+      })
+      .to(q(".idea-5"), {
+        ...ideaTextTrans, rotationX: 15,
+        rotationZ: -10,
+        skewY: "-5deg",
+        z: 10
+      }, "+=1")
+      .to(
+        q(".idea-5 .smiley"),
+        {
+          duration: 0.7,
+          rotation: -90,
+          x: 8
+        },
+        "+=0.4"
+      )
+      .to(q(".idea-5"), {
+        duration: 0.6,
+        opacity: 0,
+        y: 20
+      }, "+=0.3")
+
+      .from(
+        q(".idea-6 span"),
+        {
+          duration: 0.8,
+          opacity: 0,
+          rotation: 15,
+          ease: Expo.easeIn
+        },
+      )
+      .to(q(".idea-6 span"), {
+        stagger: 0.2,
+        scale: 1,
+        opacity: 1,
+        rotation: 0,
+      }, "+=1")
+      .to(
+        q(".idea-6 span"),
+        {
+          stagger: 0.2,
+          duration: 0.8,
+          scale: 1,
+          opacity: 0,
+          rotation: -15,
+          ease: Expo.easeIn
+        },
+        "+=1"
+      )
 
 
       .fromTo(
@@ -340,21 +343,13 @@ export default function Birthday() {
           opacity: 0,
           scale: 80,
           stagger: 0.3,
+          onComplete: () => { setIsShowCarousel(true) }
         },
       )
-      // .to(
-      //   q(".nine svg"),
-      //   {
-      //     duration: 5.4,
-      //     visibility: "visible",
-      //     opacity: 0,
-      //     scale: 80,
-      //     stagger: 10,
-      //   },
-      // )
+
   }, []);
 
-  const randomBalloons = (n = 10) => {
+  const randomBalloons = (n = 50) => {
     // return;
     const res = [];
     [...Array(n)].forEach((e, i) => {
@@ -364,12 +359,12 @@ export default function Birthday() {
     })
     return res;
   }
-  
+
   return (
     <div ref={el} className="App">
       <div className="container">
-        {/* <div className="a"> */}
-        {/* <h1 className="one">
+        <div className="a">
+          <h1 className="one">
             <span data-node-name="greeting">היי </span>
             <span data-node-name="name">רעותי</span>
           </h1>
@@ -403,11 +398,11 @@ export default function Birthday() {
             <span data-node-name="bigTextPart1">א</span>
             <span data-node-name="bigTextPart2">ז</span>
           </p>
-        </div> */}
+        </div>
 
         <div className="six">
-          <img src={reut} alt="" className="reut-dp" data-node-name="imagePath" draggable="false"/>
-          <img src={hat} alt="" class="hat" />
+          <img src={reut} alt="" className="reut-dp" data-node-name="imagePath" draggable="false" />
+          <img src={hat} alt="" className="hat" />
           <div className="wish">
             <h3 className="wish-hbd" data-node-name="wishHeading">יום הולדת שמח!</h3>
           </div>
@@ -428,6 +423,9 @@ export default function Birthday() {
       <p id="replay" data-node-name="replayText">Or click, if you want to watch it again.</p>
       <p className="last-smile" data-node-name="outroSmiley">:)</p>
     </div> */}
+        {isShowCarousel && <div className="carousel">
+          <CarouselComponent />
+        </div>}
       </div>
     </div>
   );

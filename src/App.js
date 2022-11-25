@@ -11,12 +11,12 @@ import TimeCounter from './components/Birthday/TimeCounter/TimeCounter';
 
 function App() {
     return (
-            <BrowserRouter>
-                <Routes>
-                    <Route exact path='/'  element={<TimeCounter />} />
-                    <Route exact path='/today'  element={<Birthday />} />
-                </Routes>
-            </BrowserRouter>
+        <BrowserRouter>
+            <Routes>
+                <Route exact path='/' element={<TimeCounter />} />
+                <Route exact path='/today' element={<Birthday />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 
