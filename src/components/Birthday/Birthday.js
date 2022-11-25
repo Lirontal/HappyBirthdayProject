@@ -22,18 +22,24 @@ export default function Birthday() {
   const tl = useRef();
   const balloons = [bal1, bal2, bal3, bal4];
 
-  const ideaTextTrans = {
-    opacity: 1,
-    y: -20,
-    duration: 0.7,
-
+  const ideaTextTrans = (extra) => {
+    return {
+      opacity: 0,
+      y: -20,
+      rotationX: 5,
+      skewX: "15deg",
+      ...extra
+    }
   };
 
-  const ideaTextTransLeave = {
-    opacity: 0,
-    y: 20,
-    rotationY: 5,
-    duration: 0.7,
+  const ideaTextTransLeave = (extra) => {
+    return {
+      opacity: 0,
+      y: 20,
+      rotationY: 5,
+      skewX: "-15deg",
+      ...extra
+    }
   };
 
   const textbox = `אהובה שלי ❤️
@@ -44,106 +50,86 @@ export default function Birthday() {
 
   useEffect(() => {
 
+    const hbd = document.getElementsByClassName("wish-hbd")[0];
+    hbd.innerHTML = `<span>${hbd.innerHTML.replace(/""/g, " ")
+      .split("").map(a => `${a === "" ? " " : a}`)
+      .join("</span><span>")}</span`;
+
     tl.current = gsap.timeline()
-      .from(q(".text-box"), {
-        visibility: "hidden"
-      })
       .to(q(".container"), {
         duration: 0.1,
         visibility: "visible"
       })
-
       .from(q(".one"), {
-        duration: 0.4,
+        duration: 0.7,
         opacity: 0,
-        y: 0
+        y: 10
       })
       .from(q(".two"), {
         duration: 0.4,
         opacity: 0,
         y: 10
-      }, "-=1")
-      .to(q(".one"), {
-        duration: 0.7,
-        opacity: 1,
-        y: -10
-      }, "+=0.5")
-      .to(q(".two"), {
-        duration: 0.7,
-        opacity: 1,
-        y: -10
-      }, "+=0.5")
-      .to(q(".one"), {
-        duration: 0.7,
-        opacity: 0,
-        y: 10
-      }, "+=0.5")
-      .to(q(".two"), {
-        duration: 0.7,
-        opacity: 0,
-        y: 10
-      }, "+=0.5")
-
-
+      })
+      .to(
+        q(".one"),
+        {
+          duration: 0.7,
+          opacity: 0,
+          y: 10
+        },
+        2
+      )
+      .to(
+        q(".two"),
+        {
+          duration: 0.7,
+          stagger: "-=1",
+          opacity: 0,
+          y: 10
+        },
+      )
       .from(q(".three"), {
-        duration: 0.4,
-        opacity: 0,
-        y: 0
-      })
-      .to(q(".three"), {
-        duration: 0.7,
-        opacity: 1,
-        y: -10
-      }, "+=0.5")
-      .to(q(".three"), {
         duration: 0.7,
         opacity: 0,
         y: 10
-      }, "+=0.5")
-
-
-
-
-
-      .from(q(".text-box"), {
-        duration: 2.1,
-        opacity: 0,
-        scale: 0.2,
+        // scale: 0.7
       })
-      .to(q(".text-box"), {
-        duration: 0.7,
-        opacity: 1,
-        scale: 1,
-        visibility: "visible"
+      .to(
+        q(".three"),
+        {
+          duration: 0.7,
+          opacity: 0,
+          y: 10
+        },
+        "+=2"
+      )
 
-      }, "+=0.5")
-
-      .from(q(".fake-btn"), {
+      .from(q(".four"), {
         duration: 0.7,
         scale: 0.2,
         opacity: 0
       })
-      .to(q(".fake-btn"), {
-        duration: 0.7,
-        scale: 1,
-        opacity: 1
-      }, "-=0.5")
+      .from(q(".fake-btn"), {
+        duration: 0.3,
+        scale: 0.2,
+        opacity: 0
+      })
       .to(
         q(".hbd-chatbox span"),
         {
-          stagger: 0.08,
           duration: 0.7,
+          stagger: 0.05,
           visibility: "visible"
         },
       )
       .to(q(".fake-btn"), {
-        duration: 0.7,
+        duration: 0.1,
         backgroundColor: "rgb(127, 206, 248)"
       })
       .to(
         q(".four"),
         {
-          duration: 0.7,
+          duration: 0.5,
           scale: 0.2,
           opacity: 0,
           y: -150
@@ -152,63 +138,37 @@ export default function Birthday() {
       )
 
 
-
-      .from(q(".idea-1"), ideaTextTransLeave)
-      .to(q(".idea-1"), ideaTextTrans, "+=1")
-      .to(q(".idea-1"), {
-        duration: 0.7,
-        opacity: 0,
-        y: 20
-      }, "+=1")
-
-      .from(q(".idea-2"), ideaTextTransLeave)
-      .to(q(".idea-2"), ideaTextTrans, "+=1")
-      .to(q(".idea-2"), {
-        duration: 0.7,
-        opacity: 0,
-        y: 20
-      }, "+=1")
-
-      .from(q(".idea-3"), { ...ideaTextTransLeave, visibility: "hidden" })
-      .to(q(".idea-3"), {
-        ...ideaTextTrans, visibility: "visible"
-      }, "+=1")
-      .to(".idea-3 strong", {
+      .from(q(".idea-1"), ideaTextTrans({ duration: 0.7 }))
+      .to(q(".idea-1"), ideaTextTransLeave({ stagger: 1.5, duration: 0.7 }), "+=1.5")
+      .from(q(".idea-2"), ideaTextTrans({ duration: 0.7 }))
+      .to(q(".idea-2"), ideaTextTransLeave({ stagger: 1.5, duration: 0.7 }), "+=1.5")
+      .from(q(".idea-3"), ideaTextTrans({ duration: 0.7 }))
+      .to(q(".idea-3 strong"), {
         duration: 0.5,
         scale: 1.2,
-        x: -10,
+        x: 10,
         backgroundColor: "rgb(21, 161, 237)",
         color: "#fff",
-        visibility: "visible"
+        marginRight: "30px"
       })
-      .to(q(".idea-3"), {
-        duration: 0.7,
-        opacity: 0,
-        y: 20
-      }, "+=0.5")
-
-      .from(q(".idea-4"), ideaTextTransLeave)
-      .to(q(".idea-4"), ideaTextTrans, "+=1")
-      .to(q(".idea-4"), {
-        duration: 0.7,
-        opacity: 0,
-        y: 20
-      }, "+=0.5")
+      .to(q(".idea-3"), ideaTextTransLeave({ stagger: 1.5, duration: 0.7 }), "+=1.5")
 
 
-
-      .from(q(".idea-5"), {
-        ...ideaTextTransLeave, rotationX: 15,
-        rotationZ: -10,
-        skewY: "-5deg",
-        z: 10
-      })
-      .to(q(".idea-5"), {
-        ...ideaTextTrans, rotationX: 15,
-        rotationZ: -10,
-        skewY: "-5deg",
-        z: 10
-      }, "+=1")
+      .from(q(".idea-4"), ideaTextTrans({ duration: 0.7 }))
+      .to(q(".idea-4"), ideaTextTransLeave({ duration: 0.7 }), "+=1.5")
+      .from(
+        q(".idea-5"),
+        {
+          duration: 0.7,
+          rotationX: 15,
+          rotationZ: -10,
+          skewY: "-5deg",
+          y: 50,
+          z: 10,
+          opacity: 0
+        },
+        "+=0.5"
+      )
       .to(
         q(".idea-5 .smiley"),
         {
@@ -218,144 +178,134 @@ export default function Birthday() {
         },
         "+=0.4"
       )
-      .to(q(".idea-5"), {
-        duration: 0.6,
-        opacity: 0,
-        y: 20
-      }, "+=0.3")
+      .to(
+        q(".idea-5"),
+        {
+          duration: 0.7,
+          scale: 0.2,
+          opacity: 0
+        },
+        "+=2"
+      )
 
       .from(
         q(".idea-6 span"),
         {
           duration: 0.8,
+          stagger: 0.2,
+          scale: 3,
           opacity: 0,
           rotation: 15,
-          ease: Expo.easeIn
+          ease: Expo.easeOut
         },
       )
-      .to(q(".idea-6 span"), {
-        stagger: 0.2,
-        scale: 1,
-        opacity: 1,
-        rotation: 0,
-      }, "+=1")
       .to(
         q(".idea-6 span"),
         {
-          stagger: 0.2,
           duration: 0.8,
-          scale: 1,
+          stagger: 0.2,
+          scale: 3,
           opacity: 0,
           rotation: -15,
-          ease: Expo.easeIn
+          ease: Expo.easeOut
         },
         "+=1"
       )
 
-
       .fromTo(
         q(".baloons img"),
         {
-          stagger: 0.2,
           opacity: 0.9,
           y: 1400,
-          duration: 0,
+          stagger: 0.2,
         },
         {
-          stagger: 0.2,
+          duration: 2.5,
           opacity: 1,
           y: -1000,
-          duration: 2.5,
+          stagger: 0.2,
         },
+        "+=0.5"
       )
 
       .from(
         q(".reut-dp"),
         {
           duration: 0.5,
+          scale: 3.5,
           opacity: 0,
+          x: 25,
+          y: -25,
+          rotationZ: -45
         },
-        "-=21.5"
+        "-=2"
       )
-      .to(
-        q(".reut-dp"),
+      .from(
+        q(".hat"),
         {
           duration: 0.5,
-          opacity: 1,
-          y: -10,
-        },
-        "-=2.5"
-      )
-
-
-      .from(q(".hat"), {
-        opacity: 0,
-      })
-
-      .to(q(".hat"), {
-        y: '-5vh',
-        rotation: 20,
-        opacity: 1,
-        duration: 0.5
-      })
+          x: "20vw",
+          y: "-150px",
+          rotation: 20,
+          opacity: 0
+        }, "+=1")
 
 
       .from(
-        q(".wish-hbd"),
+        q(".wish-hbd span"),
         {
-          stagger: 0.7,
           opacity: 0,
           y: -50,
           // scale: 0.3,
-          // rotation: 150,
-          color: "#ff69b4",
-          skewX: "15deg",
+          rotation: -150,
+          skewX: "30deg",
           ease: Elastic.easeOut.config(1, 0.5),
-          duration: 0.1,
-          paddingTop: "45px"
+          stagger: 0.1,
         },
       )
-
       .fromTo(
-        q(".wish-hbd"),
+        q(".wish-hbd span"),
         {
-          scale: 0.2,
-          rotationY: 150,
-          opacity: 0,
-          stagger: 0.7,
+          duration: 0.7,
+          scale: 1.4,
+          rotationY: 150
         },
         {
+          stagger: 0.1,
           scale: 1,
           rotationY: 0,
           color: "#ff69b4",
-          ease: Expo.easeInOut,
-          duration: 2.1,
-          opacity: 1
+          ease: Expo.easeOut,
+          transform: "scaleX(1)"
         },
+        "party",
+        4
       )
 
-
       .to(
-        q(".eight svg"),
+        ".eight svg",
         {
-          duration: 5.4,
+          duration:1.5,
           visibility: "visible",
           opacity: 0,
           scale: 80,
-          stagger: 0.3,
-          onComplete: () => { setIsShowCarousel(true) }
+          repeat: 2,
+          repeatDelay: 0.7,
+          stagger:0.3,
+          onComplete:()=> {console.log("done")}
         },
       )
-
   }, []);
 
   const randomBalloons = (n = 50) => {
-    // return;
     const res = [];
     [...Array(n)].forEach((e, i) => {
-      const randomBalloonIndex = getRandomInt(balloons.length);
       const indexBalloon = balloons[i % balloons.length]
-      res.push(<img key={i} src={indexBalloon} alt="" />)
+      res.push(<img
+         key={i} 
+        src={indexBalloon}
+        //style={{right:`${randomPosition}vw`,left:`${randomPosition2}vw`}}
+        alt="" />)
     })
     return res;
   }
@@ -397,6 +347,9 @@ export default function Birthday() {
           <p className="idea-6">
             <span data-node-name="bigTextPart1">א</span>
             <span data-node-name="bigTextPart2">ז</span>
+            <span data-node-name="bigTextPart2">.</span>
+            <span data-node-name="bigTextPart2">.</span>
+            <span data-node-name="bigTextPart2">.</span>
           </p>
         </div>
 
@@ -412,17 +365,10 @@ export default function Birthday() {
             {randomBalloons()}
           </div>
         </div>
+        
         <div className="eight">
           {randomizeFireworks()}
         </div>
-        {/* <div className="nine">
-          {randomizeFireworks()}
-        </div> */}
-        {/*<div className="nine">
-      <p data-node-name="outroText">Okay, now come back and tell me if you liked it.</p>
-      <p id="replay" data-node-name="replayText">Or click, if you want to watch it again.</p>
-      <p className="last-smile" data-node-name="outroSmiley">:)</p>
-    </div> */}
         {isShowCarousel && <div className="carousel">
           <CarouselComponent />
         </div>}

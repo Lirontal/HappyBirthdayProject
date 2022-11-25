@@ -70,11 +70,11 @@
 .fake-btn {
   position: absolute;
   left: 5px;
-  bottom: -60px;
   color: #fff;
   background-color: rgb(21, 161, 237);
-  padding: 7px 10px;
+  padding: 5px 8px;
   border-radius: 3px;
+  top: 65px;
 }
 
 .five p {
@@ -88,7 +88,6 @@
   padding: 3px 5px;
   border-radius: 3px;
   display: inline-block;
-  margin-right: 10px;
 }
 
 .five .idea-5 {
@@ -117,13 +116,10 @@
 
 .six .hat {
   position: absolute;
-  width: 60px;
-  top: -25px;
-  margin-left: auto;
-  margin-right: auto;
-  right: 0;
-  left: 77px;
-  /* left: 41.5%; */
+  width: 50px;
+  top: -35px;
+  left: 51.5%;
+  transform: rotate(20deg) !important;
   /* transform: scale(0.1); */
 }
 
@@ -210,7 +206,11 @@
 .wish-hbd {
   font-size: 3em;
   margin: 0;
-  text-transform: uppercase;
+  white-space: break-spaces;
+}
+.wish-hbd > span {
+  transform: scaleX(-1);
+
 }
 
 .wish h5 {
@@ -229,31 +229,6 @@
   cursor: pointer;
 }
 
-/* Media Queries */
-@media screen and (max-height: 1000px) {
-  .six .hat {
-    /* left: 40%; */
-  }
-}
-
-@media screen and (max-height: 800px) {
-  .six .hat {
-    /* left: 37%; */
-  }
-}
-
-/* @media screen and (max-height: 700px) {
-  .six .hat {
-    left: 32%;
-  }
-}
-
-@media screen and (max-height: 850px) and (max-width: 450px) {
-  .six .hat {
-    left: 32%;
-  }
-} */
-
 @media screen and (max-width: 500px) {
   .container {
     width: 90%;
@@ -263,9 +238,9 @@
     width: 90%;
   }
 
-  .fake-btn {
-    left: 5px;
-    bottom: -60px;
+  .text-box .fake-btn {
+    right: 5px;
+    bottom: -38px;
   }
 
   .idea-5 span {
@@ -274,15 +249,6 @@
 
   .idea-6 span {
     font-size: 10rem;
-  }
-
-  .hat {
-    width: 50px;
-    top: -20px;
-    /* margin-left: auto;
-    margin-right: auto;
-    right: 0;
-    left: 20%; */
   }
 
   .wish-hbd {
@@ -297,10 +263,6 @@
     font-size: 1.5rem;
     font-weight: lighter;
   }
-}
-
-.idea5text {
-  padding-left: 45px;
 }
 
 .App {
