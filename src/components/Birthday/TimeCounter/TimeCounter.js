@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Countdown from '../../Countdown/Countdown';
 import "./TimeCounter.css";
 
 const TimeCounter = ({ name, day, month }) => {
+  const navigate = useNavigate()
   // useState Hooks
   const [state, setState] = useState({
     seconds: 0,
@@ -32,6 +34,7 @@ const TimeCounter = ({ name, day, month }) => {
 
   useEffect(() => {
     setInterval(() => {
+      isItBday && navigate("/today")
       const countdown = () => {
         // Getting the Current Date
         const dateAtm = new Date();

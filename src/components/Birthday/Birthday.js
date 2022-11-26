@@ -6,7 +6,7 @@ import bal2 from '../../images/balloon2.svg';
 import bal3 from '../../images/balloon3.svg';
 import bal4 from '../../images/balloon4.svg';
 
-import reut from '../../images/reut.JPG';
+import reut from '../../images/reut-pic.jpg';
 import hat from '../../images/hat.svg';
 
 import { getRandomInt } from "../../utils";
