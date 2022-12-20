@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Countdown from '../../Countdown/Countdown';
 import "./TimeCounter.css";
 
-const TimeCounter = ({ name, day, month }) => {
+const TimeCounter = ({ name = "רעותי", day = 22, month = 3 }) => {
   const navigate = useNavigate()
   // useState Hooks
-  const [state, setState] = useState({
-    seconds: 0,
-    hours: 0,
-    minutes: 0,
-    days: 0,
-    isItBday: false,
-  });
-
-  if (name === undefined || day === undefined || month === undefined) {
-    // This is if not enough params are provided
-    name = 'רעותי'; // Name of the Person
-    month = 3; // Month of the Birthday
-    day = 22; // Day of the Birthday
-  }
+  const [state, setState] = useState();
 
   // get current time
   const currentTime = new Date();
@@ -27,34 +14,26 @@ const TimeCounter = ({ name, day, month }) => {
   const currentYear = currentTime.getFullYear();
 
   // Getting the Birthday in Data Object
-  // WE subtract 1 from momnth ; Months start from 0 in Date Object
+  // WE subtract 1 from month ; Months start from 0 in Date Object
   // Bithday Boolean
   const isItBday =
     currentTime.getDate() === day && currentTime.getMonth() === month - 1;
 
-  useEffect(() => {
+  function daysUntilNext(month, day) {
+    const today = new Date();
+    const bday = new Date(today.getFullYear(), month - 1, day);
+    if (today.getTime() > bday.getTime()) {
+      bday.setFullYear(bday.getFullYear() + 1);
+    }
+    const diff = bday.getTime() - today.getTime();
+    return diff;
+  }
+
+  useLayoutEffect(() => {
     setInterval(() => {
       isItBday && navigate("/today")
       const countdown = () => {
-        // Getting the Current Date
-        const dateAtm = new Date();
-
-        // if the Birthday has passed
-        // then set the Birthday countdown for next year
-        let birthdayDay = new Date(currentYear, month - 1, day);
-        if (dateAtm > birthdayDay) {
-          birthdayDay = new Date(currentYear + 1, month - 1, day);
-        } else if (dateAtm.getFullYear() === birthdayDay.getFullYear() + 1) {
-          birthdayDay = new Date(currentYear, month - 1, day);
-        }
-
-        // Getitng Current Time
-        const currentTime = dateAtm.getTime();
-        // Getting Birthdays Time
-        const birthdayTime = birthdayDay.getTime();
-
-        // Time remaining for the Birthday
-        const timeRemaining = birthdayTime - currentTime;
+        const timeRemaining = daysUntilNext(month, day)
 
         let seconds = Math.floor(timeRemaining / 1000);
         let minutes = Math.floor(seconds / 60);
@@ -74,7 +53,6 @@ const TimeCounter = ({ name, day, month }) => {
           days,
           isItBday,
         }));
-        // console.log(`${days}:${hours}:${minutes}:${seconds} , ${isItBday}`);
       };
       if (!isItBday) {
         countdown();
@@ -87,7 +65,7 @@ const TimeCounter = ({ name, day, month }) => {
     }, 1000);
   }, [currentYear, day, isItBday, month]);
 
-  let birth = new Date(currentYear, month - 1, day);
+  const birth = new Date(currentYear, month - 1, day);
   const monthNames = [
     'ינואר',
     'פברואר',
@@ -102,18 +80,16 @@ const TimeCounter = ({ name, day, month }) => {
     'נובמבר',
     'דצמבר',
   ];
-  let monthBday = monthNames[birth.getMonth()];
+  const monthBday = monthNames[birth.getMonth()];
 
   return (
     <div className='page'>
-      <Countdown countdownData={state} name={name} />
-      {!isItBday && (
-        <>
-          <div className='birthdate'>
-            יום הולדת: {day} {monthBday} {currentYear}
-          </div>
-        </>
-      )}
+      {state && <>
+        <Countdown countdownData={state} name={name} />
+        <div className='birthdate'>
+          יום הולדת: {day} {monthBday} {currentYear}
+        </div>
+      </>}
     </div>
   );
 };
