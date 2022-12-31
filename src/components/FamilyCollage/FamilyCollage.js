@@ -70,7 +70,7 @@ const FamilyCollage = () => {
 
     const setting = {
         width: '80vw',
-        height: ['', '170px'],
+        height: ['250px', '170px'],
         layout: [1, 4],
         photos: 
             pictures.map(pic => { return { source: pic.src } })
