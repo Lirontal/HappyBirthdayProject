@@ -22,8 +22,20 @@ body,
   top: 0;
   left: 0;
 }
+.carouselImageContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  height: fit-content;
+}
 
-.carouselImg{
+.carouselImg {
   width: 325px;
   height: 250px;
+}
+
+.carouselTxt {
 }

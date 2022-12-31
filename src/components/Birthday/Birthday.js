@@ -9,13 +9,12 @@ import bal4 from '../../images/balloon4.svg';
 import reut from '../../images/reut-pic.jpg';
 import hat from '../../images/hat.svg';
 
-import { getRandomInt } from "../../utils";
 import { randomizeFireworks } from "./birthdayUtils";
-import CarouselComponent from "../Carousel/Carousel";
+import { useNavigate } from 'react-router-dom';
 
 export default function Birthday() {
-
-  const [isShowCarousel, setIsShowCarousel] = useState(false);
+  const navigate = useNavigate()
+  const [isShowCarouselButton, setIsShowCarouselButton] = useState(true);
 
   const el = useRef();
   const q = gsap.utils.selector(el);
@@ -224,6 +223,7 @@ export default function Birthday() {
           opacity: 1,
           y: -1000,
           stagger: 0.2,
+          visibility:"visible"
         },
         "+=0.5"
       )
@@ -285,14 +285,14 @@ export default function Birthday() {
       .to(
         ".eight svg",
         {
-          duration:1.5,
+          duration: 1.5,
           visibility: "visible",
           opacity: 0,
           scale: 80,
           repeat: 2,
           repeatDelay: 0.7,
-          stagger:0.3,
-          onComplete:()=> {console.log("done")}
+          stagger: 0.3,
+          onComplete: () => { setIsShowCarouselButton(true) }
         },
       )
   }, []);
@@ -302,7 +302,7 @@ export default function Birthday() {
     [...Array(n)].forEach((e, i) => {
       const indexBalloon = balloons[i % balloons.length]
       res.push(<img
-         key={i} 
+        key={i}
         src={indexBalloon}
         //style={{right:`${randomPosition}vw`,left:`${randomPosition2}vw`}}
         alt="" />)
@@ -311,7 +311,7 @@ export default function Birthday() {
   }
 
   return (
-    <div ref={el} className="App">
+    <div ref={el} className="BG">
       <div className="container">
         <div className="a">
           <h1 className="one">
@@ -365,14 +365,16 @@ export default function Birthday() {
             {randomBalloons()}
           </div>
         </div>
-        
+
         <div className="eight">
           {randomizeFireworks()}
-        </div>
-        {isShowCarousel && <div className="carousel">
-          <CarouselComponent />
-        </div>}
+        </div>{isShowCarouselButton && <button className="carouselButton"
+        onClick={() => navigate("/carousel")}>
+        לחץ עליי
+      </button>
+      }
       </div>
+      
     </div>
   );
 }

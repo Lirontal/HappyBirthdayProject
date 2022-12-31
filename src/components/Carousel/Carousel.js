@@ -1,39 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "./Carousel.css";
 import {
     Carousel,
     CarouselItem,
 } from 'reactstrap';
-import pic1 from '../../images/carouselImages/1.jpeg';
-import pic2 from '../../images/carouselImages/2.jpeg';
-import pic3 from '../../images/carouselImages/3.jpeg';
 
-const CarouselComponent = () => {
-    const items = [
-        {
-            src: pic1,
-            altText: 'Slide One'
-        },
-        {
-            src: pic2,
-            altText: 'Slide Two'
-        },
-        {
-            src: pic3,
-            altText: 'Slide Three'
-        }
-    ];
+const CarouselComponent = ({ pictures }) => {
 
     const [activeIndex, setActiveIndex] = useState(0);
 
-
-    const carouselItemData = items.map((item) => {
+    const carouselItemData = pictures.map((item) => {
         return (
             <CarouselItem
                 key={item.src}
             >
-                <img src={item.src} alt={item.altText} className="carouselImg" />
-                <h3>{item.altText}</h3>
+                <div className="carouselImageContent">
+                    <img src={item.src} alt={item.altText} className="carouselImg" />
+                    <h3 className="carouselTxt">{item.altText}</h3>
+                </div>
             </CarouselItem>
         );
     });
@@ -41,7 +25,7 @@ const CarouselComponent = () => {
     const previousButton = () => {
         //  if (animating) return;
         const nextIndex = activeIndex === 0 ?
-            items.length - 1 : activeIndex - 1;
+            pictures.length - 1 : activeIndex - 1;
         setActiveIndex(nextIndex);
     }
 
@@ -49,25 +33,23 @@ const CarouselComponent = () => {
     const nextButton = () => {
         console.log(activeIndex);
         // if (animating) return;
-        const nextIndex = activeIndex === items.length - 1 ?
-            items.length : activeIndex + 1;
-        setActiveIndex(nextIndex);
+        const nextIndex = activeIndex === pictures.length - 1 ?
+            pictures.length : activeIndex + 1;
+          setActiveIndex(nextIndex);
     }
     return (
-        <div>
-            <Carousel
-                activeIndex={activeIndex}
-                next={nextButton}
-                previous={previousButton}
-                keyboard={false}
-                pause={false}
-                ride="carousel"
-                interval={2000}
-                className="carousel-fade"
-            >
-                {carouselItemData}
-            </Carousel>
-        </div>
+        <Carousel
+            activeIndex={activeIndex}
+            next={nextButton}
+            previous={previousButton}
+            keyboard={false}
+            pause={false}
+            ride="carousel"
+            interval={2000}
+            className="carousel-fade"
+        >
+            {carouselItemData}
+        </Carousel>
     );
 };
 
