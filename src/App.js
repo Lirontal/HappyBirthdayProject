@@ -8,6 +8,7 @@ import {
 
 import Birthday from './components/Birthday/Birthday';
 import CarouselPage from './components/CarouselPage/CarouselPage';
+import FamilyCollage from './components/FamilyCollage/FamilyCollage';
 
 import TimeCounter from './components/Birthday/TimeCounter/TimeCounter';
 
@@ -18,6 +19,8 @@ function App() {
                 <Route exact path='/' element={<TimeCounter />} />
                 <Route exact path='/today' element={<Birthday />} />
                 <Route exact path='/carousel' element={<CarouselPage />} />
+                <Route exact path='/familyCollage' element={<FamilyCollage />} />
+
             </Routes>
         </BrowserRouter>
     );

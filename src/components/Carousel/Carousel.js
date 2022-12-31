@@ -32,10 +32,13 @@ const CarouselComponent = ({ pictures }) => {
     // Next button for Carousel
     const nextButton = () => {
         console.log(activeIndex);
-        // if (animating) return;
-        const nextIndex = activeIndex === pictures.length - 1 ?
-            pictures.length : activeIndex + 1;
-          setActiveIndex(nextIndex);
+        if(activeIndex === pictures.length - 1) return;
+        const nextIndex = activeIndex + 1;
+        setActiveIndex(nextIndex);
+    }
+
+    const getNextIntervalTime = ()=> {
+        return pictures[activeIndex].interval ?? 2000
     }
     return (
         <Carousel
@@ -45,7 +48,7 @@ const CarouselComponent = ({ pictures }) => {
             keyboard={false}
             pause={false}
             ride="carousel"
-            interval={2000}
+            interval={getNextIntervalTime()}
             className="carousel-fade"
         >
             {carouselItemData}
