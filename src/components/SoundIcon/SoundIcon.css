@@ -1,0 +1,7 @@
+.soundIcon{
+    position: absolute;
+    left: 20px;
+    top: 7px;
+    cursor: pointer;
+    z-index: 1;
+}

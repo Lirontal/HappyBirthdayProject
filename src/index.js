@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import WebFont from "webfontloader";
-
+import GlobalContextProvider from './contexts/GlobalContext';
 WebFont.load({
   google: {
     families: ["Heebo:400"],
@@ -12,7 +12,9 @@ WebFont.load({
 });
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <GlobalContextProvider>
     <App />
+  </GlobalContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
