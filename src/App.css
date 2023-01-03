@@ -5,14 +5,20 @@
 
 body,
 html {
-  height: 100%;
+  height: -webkit-fill-available;
   width: 100%;
   margin: 0;
   text-align: right;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;600&display=swap");
+body {
+	height: -webkit-fill-available;
+}
 
+html {
+	height: -webkit-fill-available;
+}
+@import url("https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;600&display=swap");
 
 
 :root {

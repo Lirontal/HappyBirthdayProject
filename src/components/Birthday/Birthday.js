@@ -11,10 +11,10 @@ import hat from '../../images/hat.svg';
 
 import { randomizeFireworks } from "./birthdayUtils";
 import { useNavigate } from 'react-router-dom';
-
+import Button from "../Button/Button";
 export default function Birthday() {
   const navigate = useNavigate()
-  const [isShowCarouselButton, setIsShowCarouselButton] = useState(true);
+  const [isShowCarouselButton, setIsShowCarouselButton] = useState(false);
 
   const el = useRef();
   const q = gsap.utils.selector(el);
@@ -67,7 +67,8 @@ export default function Birthday() {
       .from(q(".two"), {
         duration: 0.4,
         opacity: 0,
-        y: 10
+        y: 10,
+        onComplete: () => { setIsShowCarouselButton(true) }
       })
       .to(
         q(".one"),
@@ -223,7 +224,7 @@ export default function Birthday() {
           opacity: 1,
           y: -1000,
           stagger: 0.2,
-          visibility:"visible"
+          visibility: "visible"
         },
         "+=0.5"
       )
@@ -368,13 +369,11 @@ export default function Birthday() {
 
         <div className="eight">
           {randomizeFireworks()}
-        </div>{isShowCarouselButton && <button className="carouselButton"
-        onClick={() => navigate("/carousel")}>
-        לחץ עליי
-      </button>
-      }
+        </div>
       </div>
-      
+      <div className="carouselButton" style={{ opacity: isShowCarouselButton && 1 }}>
+        <Button onClick={() => navigate("/carousel")} text={"למסך הבא"} />
+      </div>
     </div>
   );
 }
